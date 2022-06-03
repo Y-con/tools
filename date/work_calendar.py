@@ -354,6 +354,7 @@ class Generator:
         iso_week_end_column = kwargs.get("iso_week_end_column")
 
         sheet[iso_week_row, iso_week_start_column].value = week
+        sheet[iso_week_row, iso_week_start_column].font.color = (255,255,255)
         sheet[iso_week_row, iso_week_start_column:iso_week_end_column].color = (
             60,
             120,
@@ -529,9 +530,9 @@ class Generator:
         sheet[0:17, 0:4].autofit()
 
     def generate(self):
-        raw_data = self.get_holidays(self.start_year)
-        sp = json.loads(raw_data)
-        # sp = pd.read_json("date/api_sample.json")
+        # raw_data = self.get_holidays(self.start_year)
+        # sp = json.loads(raw_data)
+        sp = pd.read_json("date/api_sample.json")
         data = sp["data"]["list"]
         df = DataFrame.from_dict(data, orient="columns")
         self.write_to_excel(df)
